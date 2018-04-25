@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
 
 class ShowList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    deleteFriend(target_index) {
+    this.state = {
+      friends: []
+    };
+
+    this.deleteFriend = this.deleteFriend.bind(this);
+  }
+
+  deleteFriend(target_index) {
     this.setState(prevState => {
       return {
         friends: prevState.friends.filter((friends, index) => {
@@ -12,19 +19,30 @@ class ShowList extends React.Component {
         })
       };
     });
-    }
+  }
+
   render() {
     return (
       <div>
-        <h3> Friends </h3>
+        <h3>Friends</h3>
         <ul>
-          {this.props.names.map((friend, index) =>
-            <li key={index} >{friend} <button onClick= {this.props.deleteFriend(index)} >Delete</button>
-          </li> )}
+          {this.props.names &&
+            this.props.names.map((friend, index) => (
+              <li key={index}>
+                {friend}{" "}
+                <button
+                  onClick={() => {
+                    this.deleteFriend(index);
+                  }}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
         </ul>
       </div>
-    )
+    );
   }
 }
 
-export default ShowList
+export default ShowList;
