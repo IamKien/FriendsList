@@ -28,7 +28,7 @@ class ShowList extends React.Component {
         <ul>
           {this.props.names &&
             this.props.names.map((friend, index) => (
-              <li key={index}>
+              <li key={index} id={index}>
                 {friend}{" "}
                 <button
                   onClick={() => {
